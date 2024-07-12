@@ -42,7 +42,7 @@ This command uses the `compose.yml` file to start the defined services. The appl
 To run the production server using Docker, execute the following command:
 
 ```sh
-docker run -it --rm -e PORT=3000 -p 3000:80 js-example
+docker run -it --rm -e PORT=80 -p 3000:80 js-example
 ```
 
 See dockerfile for list of available environment variables in production stage.
