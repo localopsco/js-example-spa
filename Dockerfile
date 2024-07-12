@@ -30,12 +30,9 @@ FROM nginx:alpine AS production
 
 ENV PORT=3000
 
-COPY nginx.conf.template /etc/nginx/templates/nginx.conf.template
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy a script that substitutes environment variables and starts Nginx
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
 EXPOSE ${PORT}
-CMD ["/start.sh"]
+
+CMD ["nginx", "-g", "daemon off;"]
