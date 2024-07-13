@@ -29,6 +29,7 @@ RUN npm run build
 FROM nginx:alpine AS production
 
 ENV PORT=3000
+ENV BACKEND_PORT=3001
 
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=build /app/dist /usr/share/nginx/html
