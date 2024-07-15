@@ -1,12 +1,13 @@
 // src/mocks/handlers.js
 import { delay, http, HttpResponse } from 'msw';
+import { Todo } from '../types';
 
-const tasks = [
+const tasks:Todo[] = [
   {
     id: 1,
     created_at: '2024-07-11T12:33:50.367Z',
     updated_at: '2024-07-11T12:33:50.367Z',
-    name: 'Switch to opentofu',
+    title: 'Switch to opentofu',
     description: 'Migrate from hashicorp terraform to opentofu',
     is_completed: true,
     attachment_url: null,
@@ -15,7 +16,7 @@ const tasks = [
     id: 2,
     created_at: '2024-07-11T12:33:50.367Z',
     updated_at: '2024-07-11T12:33:50.367Z',
-    name: 'Create example apps',
+    title: 'Create example apps',
     description: 'For Go/Ruby/Node',
     is_completed: false,
     attachment_url: 'https://www.hollywoodreporter.com/wp-content/uploads/2021/05/batman-copy.jpg',
@@ -24,7 +25,7 @@ const tasks = [
     id: 3,
     created_at: '2024-07-11T12:34:14.360Z',
     updated_at: '2024-07-11T12:34:14.360Z',
-    name: 'Switch to opentofu',
+    title: 'Switch to opentofu',
     description: 'Migrate from hashicorp terraform to opentofu',
     is_completed: false,
     attachment_url: null,
@@ -33,7 +34,7 @@ const tasks = [
     id: 4,
     created_at: '2024-07-11T12:34:14.360Z',
     updated_at: '2024-07-11T12:34:14.360Z',
-    name: 'Create example apps',
+    title: 'Create example apps',
     description: 'For Go/Ruby/Node',
     is_completed: false,
     attachment_url: null,

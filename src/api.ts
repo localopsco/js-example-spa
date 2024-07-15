@@ -30,7 +30,7 @@ export const api = createApi({
       }),
       invalidatesTags: ['Todos'],
     }),
-    addTodo: builder.mutation<Todo, { name: string; description: string }>({
+    addTodo: builder.mutation<Todo, { title: string; description: string }>({
       query: (data) => ({
         url: `/v1/tasks`,
         method: 'POST',

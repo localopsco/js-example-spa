@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 const schema = z.object({
-  name: z.string({ required_error: 'Title is required' }).max(15, 'Title cannot be more than 15 characters'),
+  title: z.string({ required_error: 'Title is required' }).max(15, 'Title cannot be more than 15 characters'),
   description: z
     .string({ required_error: 'Description is required' })
     .max(30, 'Description cannot be more than 30 characters'),
@@ -18,14 +18,14 @@ export default function NewTodo() {
   const [addTodo, addTodoResult] = api.useAddTodoMutation();
   const { register, handleSubmit, reset } = useForm<NewTaskForm>({
     defaultValues: {
-      name: '',
+      title: '',
       description: '',
     },
   });
 
   const handleFormSubmit: SubmitHandler<NewTaskForm> = async (data) => {
     try {
-      await addTodo(data);
+      await addTodo(data).unwrap();
       toast.success('Todo added sucessfully');
       reset();
     } catch {
@@ -44,7 +44,7 @@ export default function NewTodo() {
           required
           minLength={3}
           maxLength={15}
-          {...register('name')}
+          {...register('title')}
           disabled={addTodoResult.isLoading}
         />
         <input

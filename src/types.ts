@@ -1,6 +1,6 @@
 export interface Todo {
   id: number;
-  name: string;
+  title: string;
   description: string;
   is_completed: boolean;
   attachment_url: string | null;

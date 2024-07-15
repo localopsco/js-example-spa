@@ -96,7 +96,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
                     'line-through': todo.is_completed,
                   })}
                 >
-                  {todo.name}
+                  {todo.title}
                 </span>
                 {todo.attachment_url !== null && (
                   <a
