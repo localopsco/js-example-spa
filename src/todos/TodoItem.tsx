@@ -125,7 +125,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
               'line-through': todo.is_completed,
             })}
           >
-            {todo.description} wkqwewnf
+            {todo.description}
           </p>
         </div>
 
