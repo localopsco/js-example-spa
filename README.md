@@ -25,6 +25,12 @@ To build the Docker image for this project, run the following command in your te
 docker build -t js-example:latest .
 ```
 
+Preferrably before publishing to ECR build for platform `linux/amd`
+
+```sh
+docker build --platform linux/amd64 -t js-example:latest .
+```
+
 This command creates a Docker image named `js-example` with the tag `latest`.
 
 ## Development: Using Docker Compose
