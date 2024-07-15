@@ -45,7 +45,7 @@ export const api = createApi({
         formData.append('file', file);
 
         return {
-          url: `/v1/tasks/${id}/attach`,
+          url: `/v1/tasks/${id}/attach/`,
           method: 'POST',
           body: formData,
         };
