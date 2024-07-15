@@ -72,61 +72,61 @@ export default function TodoItem({ todo }: TodoItemProps) {
   };
 
   return (
-    <div>
-      <div
-        className={clsx('group flex flex-1 rounded-md p-2 px-4 hover:bg-[rgba(214,214,214,0.15)]', {
-          'pointer-events-none bg-gray-800': setCheckedResult.isLoading,
-        })}
-      >
-        <div className="w-full">
-          <div className="flex items-center">
-            <button
-              className="-mt-1"
-              onClick={async () => {
-                setChecked({ id: todo.id, checked: !todo.is_completed });
-              }}
-              disabled={setCheckedResult.isLoading}
-            >
-              {todo.is_completed ? <SquareCheckIcon size={24} /> : <SquareIcon size={20} />}
-            </button>
-            <div className="ml-2 flex flex-1 flex-col items-start overflow-hidden pr-2">
-              <p className="flex items-center gap-2">
-                <span
-                  className={clsx('min-w-0 text-ellipsis text-sm', {
-                    'line-through': todo.is_completed,
-                  })}
-                >
-                  {todo.title}
-                </span>
-                {todo.attachment_url !== null && (
-                  <a
-                    className={clsx(
-                      'inline-flex items-center gap-0.5 rounded-full bg-[#d9d9d9] px-2 py-px text-[10px] font-medium text-black',
-                      {
-                        'pointer-events-none': deleteFileResult.isLoading,
-                      },
-                    )}
-                    href={todo.attachment_url}
-                    target="_blank"
-                    download
-                  >
-                    <PaperclipIcon size="1em" />{' '}
-                    <span className="text-[9px]">
-                      {decodeURIComponent(todo.attachment_url.split('/').pop() ?? 'Attachment')}
-                    </span>
-                    <XIcon size={'1em'} className="ml-1" onClick={(e) => void handleDeleteAttachment(e)} />
-                  </a>
-                )}
-              </p>
-              <span
-                className={clsx('min-w-0 text-ellipsis text-xs text-[#909090]', {
+    <div
+      className={clsx('group flex flex-1 rounded-md p-2 px-4 hover:bg-[rgba(214,214,214,0.15)]', {
+        'pointer-events-none bg-gray-800': setCheckedResult.isLoading,
+      })}
+    >
+      <div className="flex flex-1 items-center">
+        <button
+          className="-mt-1"
+          onClick={async () => {
+            setChecked({ id: todo.id, checked: !todo.is_completed });
+          }}
+          disabled={setCheckedResult.isLoading}
+        >
+          {todo.is_completed ? <SquareCheckIcon size={24} /> : <SquareIcon size={20} />}
+        </button>
+        <div className="ml-2 flex flex-1 flex-col">
+          <div className="flex items-center gap-2">
+            <div className="max-w-64">
+              <p
+                className={clsx('truncate text-sm', {
                   'line-through': todo.is_completed,
                 })}
               >
-                {todo.description}
-              </span>
+                {todo.title}
+              </p>
             </div>
+            {todo.attachment_url !== null && (
+              <div>
+                <a
+                  className={clsx(
+                    'inline-flex items-center gap-0.5 rounded-full bg-[#d9d9d9] px-2 py-px text-[10px] font-medium text-black',
+                    {
+                      'pointer-events-none': deleteFileResult.isLoading,
+                    },
+                  )}
+                  href={todo.attachment_url}
+                  target="_blank"
+                  download
+                >
+                  <PaperclipIcon size="1em" />{' '}
+                  <span className="max-w-20 truncate text-[9px]">
+                    {decodeURIComponent(todo.attachment_url.split('/').pop() ?? 'Attachment')}
+                  </span>
+                  <XIcon size={'1em'} className="ml-1" onClick={(e) => void handleDeleteAttachment(e)} />
+                </a>
+              </div>
+            )}
           </div>
+          <p
+            className={clsx('max-w-96 truncate text-xs text-[#909090]', {
+              'line-through': todo.is_completed,
+            })}
+          >
+            {todo.description} wkqwewnf
+          </p>
         </div>
 
         <div className={clsx('invisible flex gap-2 group-hover:visible', { '!visible': deleteTodoResult.isLoading })}>
