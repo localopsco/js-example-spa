@@ -2,7 +2,7 @@
 import { delay, http, HttpResponse } from 'msw';
 import { Todo } from '../types';
 
-const tasks:Todo[] = [
+const tasks: Todo[] = [
   {
     id: 1,
     created_at: '2024-07-11T12:33:50.367Z',
@@ -48,6 +48,7 @@ export const handlers = [
       version: 'v1.1.1',
       stack: 'Django, Postgres, Redis, React.JS',
       cloud_dependencies: 'AWS S3',
+      attachment_supported: true,
     });
   }),
 

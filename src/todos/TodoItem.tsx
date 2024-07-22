@@ -2,16 +2,17 @@ import clsx from 'clsx';
 import { PaperclipIcon, RefreshCwIcon, SquareCheckIcon, SquareIcon, Trash2Icon, XIcon } from 'lucide-react';
 
 import api from '../api';
-import { Todo } from '../types';
+import { Meta, Todo } from '../types';
 import { ChangeEventHandler, MouseEvent } from 'react';
 import { toast } from 'sonner';
 
 interface TodoItemProps {
   id: number;
   todo: Todo;
+  meta: Meta;
 }
 
-export default function TodoItem({ todo }: TodoItemProps) {
+export default function TodoItem({ todo, meta }: TodoItemProps) {
   const [setChecked, setCheckedResult] = api.useSetTodoCompleteMutation();
   const [deleteTodo, deleteTodoResult] = api.useDeleteTodoMutation();
   const [uploadFile, uploadFileResult] = api.useUploadFileMutation();
@@ -130,22 +131,24 @@ export default function TodoItem({ todo }: TodoItemProps) {
         </div>
 
         <div className={clsx('invisible flex gap-2 group-hover:visible', { '!visible': deleteTodoResult.isLoading })}>
-          <button className="relative cursor-pointer text-slate-200">
-            {uploadFileResult.isLoading && <RefreshCwIcon size={16} className="origin-center animate-spin" />}
+          {meta.attachment_supported && (
+            <button className="relative cursor-pointer text-slate-200">
+              {uploadFileResult.isLoading && <RefreshCwIcon size={16} className="origin-center animate-spin" />}
 
-            {!uploadFileResult.isLoading && (
-              <>
-                <PaperclipIcon size={16} />
-                <input
-                  type="file"
-                  className="absolute inset-0 opacity-0"
-                  id="attachment"
-                  onChange={onFileSelect}
-                  accept="image/*"
-                />
-              </>
-            )}
-          </button>
+              {!uploadFileResult.isLoading && (
+                <>
+                  <PaperclipIcon size={16} />
+                  <input
+                    type="file"
+                    className="absolute inset-0 opacity-0"
+                    id="attachment"
+                    onChange={onFileSelect}
+                    accept="image/*"
+                  />
+                </>
+              )}
+            </button>
+          )}
           <button className="text-white" disabled={deleteTodoResult.isLoading} onClick={handleDelete}>
             <Trash2Icon size={16} />
           </button>

@@ -31,12 +31,14 @@ function Todos() {
             {metadata.frameworkName} Todo App - Version {metadata.appVersion}
           </h1>
           <p className="mt-1 text-sm">Tech stack: {metadata.stack}</p>
-          <p className="mt-4 text-sm">Cloud dependencies: {metadata.cloudDependencies}</p>
+          {metadata.cloudDependencies && (
+            <p className="mt-4 text-sm">Cloud dependencies: {metadata.cloudDependencies}</p>
+          )}
         </div>
         <div className={clsx('w-160 max-w-xl rounded-2xl bg-[rgba(255,255,255,0.10)] p-10 text-gray-200 shadow-lg')}>
           <div className="flex flex-col gap-1">
             {todos.map((todo, index) => (
-              <TodoItem id={index} key={`todo_item_${index}`} todo={todo} />
+              <TodoItem id={index} key={`todo_item_${index}`} todo={todo} meta={meta} />
             ))}
           </div>
           <NewTodo />

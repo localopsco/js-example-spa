@@ -13,4 +13,5 @@ export interface Meta {
   version: string;
   stack: string;
   cloud_dependencies: string;
+  attachment_supported: boolean;
 }
