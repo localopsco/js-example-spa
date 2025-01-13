@@ -9,6 +9,8 @@ AWS_REGION=us-east-1
 VERSION=$(shell jq -r '.version' $(PACKAGE_JSON))
 IMAGE_NAME=$(shell jq -r '.name' $(PACKAGE_JSON))
 
+ECR_REPO_URL=${DOCKER_REGISTRY}/${IMAGE_NAME}
+
 # Default target
 all: build push
 
@@ -20,18 +22,12 @@ logout:
 	@echo "Logging out of AWS account"
 	helm registry logout public.ecr.aws
 
-# Build Docker image
-build:
+# Build and deploy the docker image
+deploy: login
 		@echo "Building Docker image with tag $(VERSION)..."
-		docker build --platform linux/amd64 -t $(IMAGE_NAME) .
-
-# Push Docker image
-push:
-		@echo "Pushing Docker image to registry..."
-		docker tag $(IMAGE_NAME):latest $(DOCKER_REGISTRY)/$(IMAGE_NAME):latest
-		docker tag $(IMAGE_NAME):latest $(DOCKER_REGISTRY)/$(IMAGE_NAME):v$(VERSION)
-		docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME):latest
-		docker push $(DOCKER_REGISTRY)/$(IMAGE_NAME):v$(VERSION)
+		docker buildx build --push --provenance=false --platform linux/amd64,linux/arm64 \
+		-t ${ECR_REPO_URL}:${VERSION} \
+		-t ${ECR_REPO_URL}:latest .
 
 # Clean up
 clean:
